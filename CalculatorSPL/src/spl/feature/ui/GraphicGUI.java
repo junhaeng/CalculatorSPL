@@ -93,9 +93,5 @@ public class GraphicGUI extends JFrame{
         new GraphicGUI();
     }
     
-     class CalcData{
-         
-     }
-    
 }
 
