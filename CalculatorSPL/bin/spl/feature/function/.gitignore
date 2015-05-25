@@ -8,3 +8,10 @@
 /CalcBuffer.class
 /CalcEvent.class
 /CalcEvent$Type.class
+/CalcController.class
+/ControlI.class
+/ViewI.class
+/Controller.class
+/Controller$ComputeTree.class
+/Controller$Node.class
+/Controller$UnvalidCalcInput.class

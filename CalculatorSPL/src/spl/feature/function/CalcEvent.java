@@ -3,7 +3,7 @@ package spl.feature.function;
 public class CalcEvent {
     enum Type{
         ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE,
-        ADD, SUB, MUL, MOD, QUOT,
+        ADD, SUB, MUL, MOD, QUOT, RESULT,
         POW,LOG,INV,SQRT
     }
     private Type eventType;
