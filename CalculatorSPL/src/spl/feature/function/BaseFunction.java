@@ -16,7 +16,7 @@ public class BaseFunction {
     public CalcData mod(CalcData op1, CalcData op2) throws ArithmeticException{
         return new CalcData(op1.getData() % op2.getData());
     }
-    public CalcData qout(CalcData op1, CalcData op2) throws ArithmeticException{
+    public CalcData quot(CalcData op1, CalcData op2) throws ArithmeticException{
         return new CalcData((long)op1.getData() / op2.getData());
     }
     
@@ -35,7 +35,7 @@ public class BaseFunction {
     public double mod(double op1, double op2){
         return op1 % op2;
     }
-    public double qout(double op1, double op2){
+    public double quot(double op1, double op2){
         long sub_result = (long)(op1 / op2);
         return (double)sub_result;
     }

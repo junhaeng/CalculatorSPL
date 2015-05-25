@@ -81,7 +81,7 @@ public class GraphicUI extends JFrame implements ActionListener{
         numPad.add(numbers[0]);
         numPad.add(backsBtn);
         
-        JButton clear,add,sub,mul,div,mod,qout,rest;
+        JButton clear,add,sub,mul,div,mod,quot,rest;
         clear = new JButton("Clear");
         rest = new JButton("=");
         add = new JButton("+");
@@ -89,7 +89,7 @@ public class GraphicUI extends JFrame implements ActionListener{
         mul = new JButton("*");
         div = new JButton("/");
         mod = new JButton("mod");
-        qout = new JButton("qout");
+        quot = new JButton("quot");
         
         
         rest.addActionListener(this);
@@ -104,7 +104,10 @@ public class GraphicUI extends JFrame implements ActionListener{
         div.setActionCommand("div");
         clear.addActionListener(this);
         clear.setActionCommand("clear");
-        
+        mod.addActionListener(this);
+        mod.setActionCommand("mod");
+        quot.addActionListener(this);
+        quot.setActionCommand("quot");
         
         opPad.add(clear);
         opPad.add(rest);
@@ -113,7 +116,7 @@ public class GraphicUI extends JFrame implements ActionListener{
         opPad.add(mul);
         opPad.add(div);
         opPad.add(mod);
-        opPad.add(qout);
+        opPad.add(quot);
         
         
         
@@ -126,6 +129,16 @@ public class GraphicUI extends JFrame implements ActionListener{
         extPad.add(log);
         extPad.add(inv);
         extPad.add(sqrt);
+        
+        pow.addActionListener(this);
+        pow.setActionCommand("pow");
+        log.addActionListener(this);
+        log.setActionCommand("log");
+        inv.addActionListener(this);
+        inv.setActionCommand("inv");
+        sqrt.addActionListener(this);
+        sqrt.setActionCommand("sqrt");
+        
         
         
         parentPad.add(numPad);  parentPad.add(opPad);
@@ -400,8 +413,58 @@ public class GraphicUI extends JFrame implements ActionListener{
             input_buffer = "";
             
         }else if(arg0.getActionCommand() == "mod"){
+            String last = last_input.get(last_input.size()-1);
+            if(last == "mod" || last =="init") return;
+            if(compute_end){
+                process_area.setText(result_area
+                        .getText() + "%");
+                controller.passOpreation("mod");
+                compute_end = false;
+                last_input.add("mod");
+            }
+            else{
+                if(input_buffer != ""){
+                    controller.passOperand(Double.parseDouble(input_buffer));
+                }
+                if(controller.passOpreation("mod") == -1){
+                    process_area.setText(process_area.getText().substring(0,process_area.getText().length()-1) + "%");
+                }else{
+                    process_area.append("%");                    
+                }
+                try {
+                    result_area.setText("" + controller.getResult());
+                } catch (Exception e) {
+                }
+                last_input.add("mod");
+            }
+            input_buffer = "";
             
-        }else if(arg0.getActionCommand() == "qout"){
+        }else if(arg0.getActionCommand() == "quot"){
+            String last = last_input.get(last_input.size()-1);
+            if(last == "quot" || last =="init") return;
+            if(compute_end){
+                process_area.setText(result_area
+                        .getText() + "q");
+                controller.passOpreation("quot");
+                compute_end = false;
+                last_input.add("quot");
+            }
+            else{
+                if(input_buffer != ""){
+                    controller.passOperand(Double.parseDouble(input_buffer));
+                }
+                if(controller.passOpreation("quot") == -1){
+                    process_area.setText(process_area.getText().substring(0,process_area.getText().length()-1) + "q");
+                }else{
+                    process_area.append("q");                    
+                }
+                try {
+                    result_area.setText("" + controller.getResult());
+                } catch (Exception e) {
+                }
+                last_input.add("quot");
+            }
+            input_buffer = "";
             
         }else if(arg0.getActionCommand() == "pow"){
             

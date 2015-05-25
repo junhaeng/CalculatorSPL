@@ -50,7 +50,7 @@ public class Controller implements ControlI{
                 exist_result = true;
                 break;
             case 6:
-                result = function.qout(result, opd);
+                result = function.quot(result, opd);
                 exist_result = true;
                 break;
             }
@@ -73,7 +73,7 @@ public class Controller implements ControlI{
             current_op = 4;
         }else if(ops == "mod"){
             current_op = 5;
-        }else if(ops == "qout"){
+        }else if(ops == "quot"){
             current_op = 6;
         }
         // about unary operation

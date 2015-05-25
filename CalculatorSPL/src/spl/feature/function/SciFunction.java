@@ -22,4 +22,28 @@ public class SciFunction extends BaseFunction implements Scientific{
         return new CalcData(Math.sqrt(op1.getData()));
     }
 
+    @Override
+    public double pow(double op1, double op2) {
+        // TODO Auto-generated method stub
+        return Math.pow(op1, op2);
+    }
+
+    @Override
+    public double log(double op1, double op2) {
+        // TODO Auto-generated method stub
+        return Math.log(op1)/Math.log(op2);
+    }
+
+    @Override
+    public double inv(double op1) {
+        // TODO Auto-generated method stub
+        return 1/op1;
+    }
+
+    @Override
+    public double sqrt(double op1) {
+        // TODO Auto-generated method stub
+        return Math.sqrt(op1);
+    }
+
 }
