@@ -15,9 +15,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
-import spl.feature.function.BaseFunction;
 import spl.feature.function.ControlI;
 import spl.feature.function.Controller;
+import spl.feature.function.SciFunction;
 
 public class GraphicUI extends JFrame implements ActionListener{
 
@@ -167,7 +167,8 @@ public class GraphicUI extends JFrame implements ActionListener{
                System.exit(0);
            }
        });
-       ControlI controller = new Controller(new BaseFunction());
+       //ControlI controller = new Controller(new BaseFunction());
+       ControlI controller = new Controller(new SciFunction());
        mainUI.setController(controller);
        try {
         mainUI.UIstart();
@@ -467,12 +468,121 @@ public class GraphicUI extends JFrame implements ActionListener{
             input_buffer = "";
             
         }else if(arg0.getActionCommand() == "pow"){
+            String last = last_input.get(last_input.size()-1);
+            if(last == "pow" || last =="init") return;
+            if(compute_end){
+                process_area.setText(result_area
+                        .getText() + "^");
+                controller.passOpreation("pow");
+                compute_end = false;
+                last_input.add("pow");
+            }
+            else{
+                if(input_buffer != ""){
+                    controller.passOperand(Double.parseDouble(input_buffer));
+                }
+                if(controller.passOpreation("pow") == -1){
+                    process_area.setText(process_area.getText().substring(0,process_area.getText().length()-1) + "^");
+                }else{
+                    process_area.append("^");                    
+                }
+                try {
+                    result_area.setText("" + controller.getResult());
+                } catch (Exception e) {
+                }
+                last_input.add("pow");
+            }
+            input_buffer = "";
             
         }else if(arg0.getActionCommand() == "log"){
+            String last = last_input.get(last_input.size()-1);
+            if(last == "log" || last =="init") return;
+            if(compute_end){
+                process_area.setText(result_area
+                        .getText() + " log based ");
+                controller.passOpreation("log");
+                compute_end = false;
+                last_input.add("log");
+            }
+            else{
+                if(input_buffer != ""){
+                    controller.passOperand(Double.parseDouble(input_buffer));
+                }
+                if(controller.passOpreation("log") == -1){
+                    process_area.setText(process_area.getText().substring(0,process_area.getText().length()-1) + " log based ");
+                }else{
+                    process_area.append(" log based ");                    
+                }
+                try {
+                    result_area.setText("" + controller.getResult());
+                } catch (Exception e) {
+                }
+                last_input.add("log");
+            }
+            input_buffer = "";
             
         }else if(arg0.getActionCommand() == "inv"){
+            String last = last_input.get(last_input.size()-1);
+            if(last =="init") return;
+            if(compute_end){
+                process_area.setText(result_area
+                        .getText() + "^-1");
+                controller.passOpreation("inv");
+                compute_end = false;
+                last_input.add("inv");
+                try {
+                    result_area.setText("" + controller.getResult());
+                } catch (Exception e) {
+                }
+            }
+            else{
+                if(input_buffer != ""){
+                    controller.passOperand(Double.parseDouble(input_buffer));
+                }
+                if(controller.passOpreation("inv") == -1){
+                    process_area.setText(process_area.getText().substring(0,process_area.getText().length()-1) + "^-1");
+                }else{
+                    process_area.append("^-1");                    
+                }
+                try {
+                    result_area.setText("" + controller.getResult());
+                } catch (Exception e) {
+                }
+                last_input.add("inv");
+            }
+            input_buffer = "";
             
         }else if(arg0.getActionCommand() == "sqrt"){
+            String last = last_input.get(last_input.size()-1);
+            if(last =="init") return;
+            if(compute_end){
+                process_area.setText(result_area
+                        .getText() + "SQRT");
+                controller.passOpreation("sqrt");
+                compute_end = false;
+                last_input.add("sqrt");
+                try {
+                    result_area.setText("" + controller.getResult());
+                } catch (Exception e) {
+                }
+            }
+            else{
+                if(input_buffer != ""){
+                    controller.passOperand(Double.parseDouble(input_buffer));
+                }
+                if(controller.passOpreation("sqrt") == -1){
+                    process_area.setText(process_area.getText().substring(0,process_area.getText().length()-1) + "SQRT");
+                }else{
+                    process_area.append("SQRT");                    
+                }
+                try {
+                    result_area.setText("" + controller.getResult());
+                } catch (Exception e) {
+                }
+                last_input.add("sqrt");
+            }
+            input_buffer = "";
+            
             
         }else if(arg0.getActionCommand() == "clear"){
             process_area.setText("");

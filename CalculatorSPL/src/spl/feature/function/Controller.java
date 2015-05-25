@@ -7,14 +7,14 @@ import javax.swing.JTextArea;
 public class Controller implements ControlI{
     private double result;
     private boolean exist_result;
-    private BaseFunction function;
+    private SciFunction function;
     
     private double temp_opd;
     private int current_op;
     private int valid_check;
     
     
-    public Controller(BaseFunction f){
+    public Controller(SciFunction f){
         this.function = f;
         exist_result = false;
         current_op = 0;
@@ -53,6 +53,14 @@ public class Controller implements ControlI{
                 result = function.quot(result, opd);
                 exist_result = true;
                 break;
+            case 11:
+                result = function.pow(result, opd);
+                exist_result = true;
+                break;
+            case 12:
+                result = function.log(result, opd);
+                exist_result = true;
+                break;
             }
             valid_check = 1;
         }
@@ -61,6 +69,7 @@ public class Controller implements ControlI{
 
     @Override
     public int passOpreation(String ops) {
+        int prev_op = current_op;
         if(ops == "add"){
             current_op = 1;
         }else if(ops == "result"){
@@ -76,9 +85,30 @@ public class Controller implements ControlI{
         }else if(ops == "quot"){
             current_op = 6;
         }
+        
+        
         // about unary operation
-        //.........
-        if(valid_check == 2) return -1;
+        else if(ops == "pow"){
+            current_op = 11;
+        }else if(ops == "log"){
+            current_op = 12;
+        }else if(ops == "inv"){
+            current_op = 13;
+            result = function.inv(result);
+        }else if(ops == "sqrt"){
+            current_op = 14;
+            result = function.sqrt(result);
+        }
+        
+        
+        
+        
+        if(valid_check == 2){
+            if(prev_op == 13 || prev_op == 14){
+                return 0;
+            }
+            return -1;
+        }
         else{
             valid_check = 2;
             return 0;
